@@ -155,3 +155,27 @@
     visibility: hidden;
   }
 }
+
+/* Outlined display text, used for alternating words in kinetic bands. */
+.text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--stroke, currentColor);
+}
+
+/* Letters lift one after another when their word is hovered. */
+.hover-letters {
+  display: inline-block;
+}
+.hover-letters > span[aria-hidden] {
+  display: inline-block;
+  transition: transform 0.5s var(--ease-out-expo), color 0.3s;
+  transition-delay: calc(var(--i) * 28ms);
+}
+@media (prefers-reduced-motion: no-preference) and (hover: hover) {
+  .hover-letters:hover > span[aria-hidden],
+  a:hover .hover-letters > span[aria-hidden],
+  button:hover .hover-letters > span[aria-hidden] {
+    transform: translateY(-0.14em) rotate(-3deg);
+    color: #ccff00;
+  }
+}

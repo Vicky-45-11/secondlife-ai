@@ -9,6 +9,7 @@ import { Logo } from "@/components/ui/Logo";
 import { ButtonLink } from "@/components/ui/Button";
 import { NAV_LINKS } from "@/data/nav";
 import { cn } from "@/lib/utils";
+import { HoverLetters } from "@/components/fx/HoverLetters";
 
 export function Navbar() {
   const pathname = usePathname();
@@ -74,7 +75,7 @@ export function Navbar() {
                         transition={{ type: "spring", stiffness: 400, damping: 34 }}
                       />
                     )}
-                    {l.label}
+                    <HoverLetters text={l.label} />
                   </Link>
                 </li>
               );

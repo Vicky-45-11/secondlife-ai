@@ -8,11 +8,33 @@ import { cn } from "@/lib/utils";
 type Variant = "primary" | "secondary" | "ghost" | "dark";
 
 const VARIANTS: Record<Variant, string> = {
-  primary: "bg-lime-500 text-forest-950 hover:bg-lime-300 shadow-[0_0_0_1px_rgba(204,255,0,0.4),0_10px_30px_-12px_rgba(204,255,0,0.6)]",
-  secondary: "border border-ivory-100/25 text-ivory-100 hover:border-ivory-100/60 hover:bg-ivory-100/5",
+  primary: "bg-lime-500 text-forest-950 shadow-[0_0_0_1px_rgba(204,255,0,0.4),0_10px_30px_-12px_rgba(204,255,0,0.6)]",
+  secondary: "border border-ivory-100/25 text-ivory-100 hover:border-lime-500 hover:text-forest-950",
   ghost: "text-ivory-100/80 hover:text-ivory-100",
-  dark: "bg-forest-950 text-ivory-100 hover:bg-forest-800",
+  dark: "bg-forest-950 text-ivory-100 hover:text-forest-950",
 };
+
+// The colour that floods up from the bottom of the button on hover.
+const FILL: Record<Variant, string | null> = {
+  primary: "bg-ivory-50",
+  secondary: "bg-lime-500",
+  ghost: null,
+  dark: "bg-lime-500",
+};
+
+function Fill({ variant }: { variant: Variant }) {
+  const fill = FILL[variant];
+  if (!fill) return null;
+  return (
+    <span
+      aria-hidden="true"
+      className={cn(
+        "absolute inset-0 -z-10 translate-y-[101%] rounded-[inherit] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0 group-focus-visible:translate-y-0",
+        fill,
+      )}
+    />
+  );
+}
 
 interface BaseProps {
   children: ReactNode;
@@ -49,7 +71,7 @@ function useMagnet(enabled: boolean) {
 }
 
 const base =
-  "group relative inline-flex select-none items-center justify-center gap-2 rounded-full font-medium transition-[background-color,border-color,color,box-shadow] duration-300 disabled:pointer-events-none disabled:opacity-40";
+  "group relative isolate inline-flex overflow-hidden select-none items-center justify-center gap-2 rounded-full font-medium transition-[background-color,border-color,color,box-shadow] duration-300 disabled:pointer-events-none disabled:opacity-40";
 const sizes = { md: "h-11 px-5 text-[0.95rem]", lg: "h-14 px-7 text-base" };
 
 export function ButtonLink({
@@ -65,6 +87,7 @@ export function ButtonLink({
   return (
     <motion.span ref={m.ref} style={m.style} {...m.handlers} className="inline-flex">
       <Link href={href} className={cn(base, sizes[size], VARIANTS[variant], className)} {...rest}>
+        <Fill variant={variant} />
         {children}
       </Link>
     </motion.span>
@@ -83,6 +106,7 @@ export function Button({
   return (
     <motion.span ref={m.ref} style={m.style} {...m.handlers} className="inline-flex">
       <button type="button" className={cn(base, sizes[size], VARIANTS[variant], className)} {...rest}>
+        <Fill variant={variant} />
         {children}
       </button>
     </motion.span>

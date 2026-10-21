@@ -113,7 +113,7 @@ export function ImpactPreview() {
             {METRICS.map((m) => (
               <div key={m.label} className="flex flex-col rounded-2xl bg-forest-950/50 p-3 backdrop-blur-[2px]">
                 <dt className="order-2 mt-2 text-sm text-ivory-100/60">{m.label}</dt>
-                <dd className="display text-[clamp(2.2rem,5vw,4rem)] text-ivory-50">
+                <dd className="font-grotesk text-[clamp(2.2rem,5vw,4rem)] font-bold leading-none tracking-[-0.04em] text-ivory-50 [font-stretch:80%]">
                   <Counter to={m.value} suffix={m.suffix} />
                 </dd>
               </div>

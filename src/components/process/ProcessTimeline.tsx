@@ -6,6 +6,7 @@ import { Check } from "lucide-react";
 import { Reveal } from "@/components/motion/Reveal";
 import { STAGES, STATUS_LABEL } from "@/data/process";
 import { cn } from "@/lib/utils";
+import { TiltCard } from "@/components/fx/TiltCard";
 
 /** The six stages, with a connector line that draws itself as you scroll. */
 export function ProcessTimeline() {
@@ -45,7 +46,7 @@ export function ProcessTimeline() {
               <p className="mt-2 font-mono text-xs uppercase tracking-[0.16em] text-ivory-100/45">{s.short}</p>
             </Reveal>
             <Reveal delay={0.1} className={cn(right ? "md:order-1 md:pr-14" : "md:pl-14")}>
-              <div className="panel p-7">
+              <TiltCard className="panel p-7" max={4}>
                 <p className="text-lg leading-relaxed text-ivory-100/75">{s.body}</p>
                 <ul className="mt-6 space-y-3">
                   {s.detail.map((d) => (
@@ -55,7 +56,7 @@ export function ProcessTimeline() {
                     </li>
                   ))}
                 </ul>
-              </div>
+              </TiltCard>
             </Reveal>
           </li>
         );

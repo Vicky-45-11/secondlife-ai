@@ -2,10 +2,11 @@
 
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
-import { motion, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
+import { animate, motion, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
 import { ButtonLink } from "@/components/ui/Button";
 import { ExplodedPhone } from "@/components/illustrations/ExplodedPhone";
+import { HoverLetters } from "@/components/fx/HoverLetters";
 
 const HEADLINE = [["Every", "discarded"], ["device", "has"], ["another", "story."]];
 
@@ -24,7 +25,10 @@ export function Hero() {
   const { scrollYProgress } = useScroll({ target: root, offset: ["start start", "end start"] });
   const idle = useMotionValue(0.35);
   const scrollSpread = useTransform(scrollYProgress, [0, 0.7], [0.35, 1]);
-  const spread = useSpring(reduce ? idle : scrollSpread, { stiffness: 90, damping: 20 });
+  // Dragging across the device pulls it apart by hand; it springs back on release.
+  const pulled = useMotionValue(0);
+  const combined = useTransform(() => Math.min(1, (reduce ? idle.get() : scrollSpread.get()) + pulled.get()));
+  const spread = useSpring(combined, { stiffness: 90, damping: 20 });
   const artY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 120]);
   const copyY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : -60]);
 
@@ -94,7 +98,7 @@ export function Hero() {
                 {line.map((word, j) => (
                   <span key={word} className="-mb-[0.1em] inline-block overflow-hidden pb-[0.1em] align-top">
                     <span data-hero="word" className={`hero-init inline-block ${i === 2 && j === 1 ? "italic text-lime-500" : ""}`}>
-                      {word}
+                      <HoverLetters text={word} />
                     </span>
                     {j < line.length - 1 && <span>&nbsp;</span>}
                   </span>
@@ -125,8 +129,11 @@ export function Hero() {
 
         <motion.div
           data-hero="art"
-          className="hero-init relative mx-auto aspect-[600/680] w-full max-w-[34rem] [perspective:1200px]"
+          className="hero-init relative mx-auto aspect-[600/680] w-full max-w-[34rem] cursor-grab touch-pan-y [perspective:1200px] active:cursor-grabbing"
           style={{ y: artY }}
+          data-cursor="Drag"
+          onPan={(_, info) => pulled.set(Math.min(0.65, Math.abs(info.offset.x) / 260 + Math.abs(info.offset.y) / 520))}
+          onPanEnd={() => animate(pulled, 0, { type: "spring", stiffness: 140, damping: 14 })}
         >
           <motion.div style={{ rotateX: tiltX, rotateY: tiltY }} className="h-full w-full">
             <ExplodedPhone spread={spread} className="h-full w-full" />
@@ -141,6 +148,14 @@ export function Hero() {
               <p className="mt-0.5 text-sm text-ivory-100/80">{c.note}</p>
             </div>
           ))}
+          <p
+            data-hero="callout"
+            className="hero-init pointer-events-none absolute -bottom-3 left-1/2 flex -translate-x-1/2 items-center gap-2 whitespace-nowrap font-mono text-[0.68rem] uppercase tracking-[0.2em] text-ivory-100/45"
+          >
+            <span className="h-px w-6 bg-ivory-100/30" aria-hidden="true" />
+            Drag to take it apart
+            <span className="h-px w-6 bg-ivory-100/30" aria-hidden="true" />
+          </p>
         </motion.div>
       </div>
 

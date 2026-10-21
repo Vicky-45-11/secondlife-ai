@@ -3,6 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 import { Logo } from "@/components/ui/Logo";
 import { NAV_LINKS } from "@/data/nav";
 import { EWASTE_SOURCE } from "@/data/facts";
+import { HoverLetters } from "@/components/fx/HoverLetters";
 
 export function Footer() {
   return (
@@ -21,7 +22,7 @@ export function Footer() {
             {[{ href: "/", label: "Home" }, ...NAV_LINKS].map((l) => (
               <li key={l.href}>
                 <Link href={l.href} className="text-ivory-100/75 transition-colors hover:text-lime-500">
-                  {l.label}
+                  <HoverLetters text={l.label} />
                 </Link>
               </li>
             ))}
@@ -53,8 +54,8 @@ export function Footer() {
         </div>
       </div>
       <div aria-hidden="true" className="page-x select-none">
-        <p className="display -mb-[0.18em] whitespace-nowrap text-[clamp(4rem,17vw,16rem)] text-ivory-100/[0.06]">
-          second life
+        <p className="-mb-[0.12em] whitespace-nowrap font-grotesk text-[clamp(4rem,26vw,25rem)] font-extrabold uppercase leading-[0.85] tracking-[-0.05em] text-[#13261b] [font-stretch:75%]">
+          <HoverLetters text="second life" />
         </p>
       </div>
       <div className="border-t border-ivory-100/10">

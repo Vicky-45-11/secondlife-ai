@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import { SplitHeadline, Reveal } from "@/components/motion/Reveal";
+import { ScrambleText } from "@/components/fx/ScrambleText";
 
 export function SectionHeading({
   index,
@@ -27,7 +28,7 @@ export function SectionHeading({
       <Reveal className={cn("eyebrow flex items-center gap-3", tone === "dark" ? "text-lime-500" : "text-forest-600")}>
         {index && <span className={muted}>{index}</span>}
         <span className={cn("h-px w-8", tone === "dark" ? "bg-ivory-100/25" : "bg-forest-900/25")} aria-hidden="true" />
-        {eyebrow}
+        <ScrambleText text={eyebrow} />
       </Reveal>
       <SplitHeadline as={as} id={id} lines={lines} className="display mt-5 text-[clamp(2.5rem,6vw,5.5rem)]" />
       {intro && (
