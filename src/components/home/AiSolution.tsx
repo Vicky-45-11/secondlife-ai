@@ -2,6 +2,7 @@ import { Camera, Cpu, Route } from "lucide-react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { DemoBadge } from "@/components/ui/DemoBadge";
 import { Reveal } from "@/components/motion/Reveal";
+import { TiltCard } from "@/components/fx/TiltCard";
 
 /**
  * Chapter three: what the analysis gives back. The sample result is drawn by
@@ -53,43 +54,45 @@ export function AiSolution() {
           </ol>
 
           <Reveal delay={0.15}>
-            <figure className="border-sweep relative rounded-[1.75rem] bg-forest-900 p-7 sm:p-9">
-              <div className="flex flex-wrap items-center justify-between gap-3">
-                <p className="font-mono text-xs uppercase tracking-[0.18em] text-ivory-100/50">Example result</p>
-                <DemoBadge>Illustration</DemoBadge>
-              </div>
-              <p className="display mt-5 text-4xl text-ivory-50 sm:text-5xl">Laptop · won&apos;t charge</p>
-              <div className="mt-6 grid grid-cols-3 gap-3 text-center">
-                {[
-                  ["Grade", "B"],
-                  ["Repairability", "7/10"],
-                  ["Value", "Medium"],
-                ].map(([k, v]) => (
-                  <div key={k} className="rounded-2xl border border-ivory-100/10 p-3">
-                    <p className="text-xs text-ivory-100/50">{k}</p>
-                    <p className="mt-1 font-medium text-ivory-50">{v}</p>
-                  </div>
-                ))}
-              </div>
-              <ul className="mt-7 space-y-3" aria-label="Suggested routes">
-                {SAMPLE_ROUTES.map((r, i) => (
-                  <li key={r.label} className="grid grid-cols-[6rem_1fr_2.5rem] items-center gap-3 text-sm">
-                    <span className={i === 0 ? "text-lime-500" : "text-ivory-100/70"}>{r.label}</span>
-                    <span className="h-1.5 overflow-hidden rounded-full bg-ivory-100/10">
-                      <span
-                        className={`block h-full rounded-full ${i === 0 ? "bg-lime-500" : "bg-ivory-100/40"}`}
-                        style={{ width: `${r.score}%` }}
-                      />
-                    </span>
-                    <span className="text-right font-mono text-ivory-100/50">{r.score}</span>
-                  </li>
-                ))}
-              </ul>
-              <figcaption className="mt-7 border-t border-ivory-100/10 pt-5 text-sm leading-relaxed text-ivory-100/55">
-                A hand-made example of the result layout. In this prototype, analysis runs on a demo engine that uses the
-                details you enter, not the pixels of your photo.
-              </figcaption>
-            </figure>
+            <TiltCard className="rounded-[1.75rem]" max={5}>
+              <figure className="border-sweep relative rounded-[1.75rem] bg-forest-900 p-7 sm:p-9">
+                <div className="flex flex-wrap items-center justify-between gap-3">
+                  <p className="font-mono text-xs uppercase tracking-[0.18em] text-ivory-100/50">Example result</p>
+                  <DemoBadge>Illustration</DemoBadge>
+                </div>
+                <p className="display mt-5 text-4xl text-ivory-50 sm:text-5xl">Laptop · won&apos;t charge</p>
+                <div className="mt-6 grid grid-cols-3 gap-3 text-center">
+                  {[
+                    ["Grade", "B"],
+                    ["Repairability", "7/10"],
+                    ["Value", "Medium"],
+                  ].map(([k, v]) => (
+                    <div key={k} className="rounded-2xl border border-ivory-100/10 p-3">
+                      <p className="text-xs text-ivory-100/50">{k}</p>
+                      <p className="mt-1 font-medium text-ivory-50">{v}</p>
+                    </div>
+                  ))}
+                </div>
+                <ul className="mt-7 space-y-3" aria-label="Suggested routes">
+                  {SAMPLE_ROUTES.map((r, i) => (
+                    <li key={r.label} className="grid grid-cols-[6rem_1fr_2.5rem] items-center gap-3 text-sm">
+                      <span className={i === 0 ? "text-lime-500" : "text-ivory-100/70"}>{r.label}</span>
+                      <span className="h-1.5 overflow-hidden rounded-full bg-ivory-100/10">
+                        <span
+                          className={`block h-full rounded-full ${i === 0 ? "bg-lime-500" : "bg-ivory-100/40"}`}
+                          style={{ width: `${r.score}%` }}
+                        />
+                      </span>
+                      <span className="text-right font-mono text-ivory-100/50">{r.score}</span>
+                    </li>
+                  ))}
+                </ul>
+                <figcaption className="mt-7 border-t border-ivory-100/10 pt-5 text-sm leading-relaxed text-ivory-100/55">
+                  A hand-made example of the result layout. In this prototype, analysis runs on a demo engine that uses the
+                  details you enter, not the pixels of your photo.
+                </figcaption>
+              </figure>
+            </TiltCard>
           </Reveal>
         </div>
       </div>

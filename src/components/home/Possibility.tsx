@@ -112,6 +112,7 @@ export function Possibility() {
                 onMouseEnter={() => setActive(p.id)}
                 aria-pressed={active === p.id}
                 aria-label={`${p.name}: ${p.route}`}
+                data-cursor="Inspect"
                 className="group absolute -translate-x-1/2 -translate-y-1/2 p-2"
                 style={{ left: `${p.x}%`, top: `${p.y}%` }}
               >

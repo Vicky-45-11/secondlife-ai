@@ -1,13 +1,16 @@
 import type { Metadata, Viewport } from "next";
-import { Instrument_Serif, Inter, JetBrains_Mono, Kanit } from "next/font/google";
+import { Bricolage_Grotesque, Instrument_Serif, Inter, JetBrains_Mono } from "next/font/google";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { SmoothScroll } from "@/components/layout/SmoothScroll";
+import { Cursor } from "@/components/fx/Cursor";
+import { BackToTop } from "@/components/fx/BackToTop";
 import "./globals.css";
 
 const display = Instrument_Serif({ subsets: ["latin"], weight: "400", style: ["normal", "italic"], variable: "--font-display", display: "swap" });
 const body = Inter({ subsets: ["latin"], variable: "--font-body", display: "swap" });
-const kanit = Kanit({ subsets: ["latin"], weight: ["400", "500"], variable: "--font-kanit", display: "swap" });
+// Expressive variable grotesk for kinetic type (marquees, big numbers, cursor labels).
+const grotesk = Bricolage_Grotesque({ subsets: ["latin"], variable: "--font-grotesk", display: "swap", axes: ["opsz", "wdth"] });
 const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrains-mono", display: "swap" });
 
 const description =
@@ -37,7 +40,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${display.variable} ${body.variable} ${kanit.variable} ${mono.variable}`}
+      className={`${display.variable} ${body.variable} ${grotesk.variable} ${mono.variable}`}
       // The inline script below adds a "js" class before paint; React should not warn about it.
       suppressHydrationWarning
     >
@@ -55,6 +58,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Navbar />
         <main id="main">{children}</main>
         <Footer />
+        <BackToTop />
+        <Cursor />
       </body>
     </html>
   );

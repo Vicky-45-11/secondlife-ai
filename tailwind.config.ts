@@ -78,6 +78,7 @@ const config: Config = {
         body: ["var(--font-body)", "Inter", "system-ui", "sans-serif"],
         sans: ["var(--font-body)", "Inter", "system-ui", "sans-serif"],
         kanit: ["var(--font-kanit)", "Kanit", "system-ui", "sans-serif"],
+        grotesk: ["var(--font-grotesk)", "system-ui", "sans-serif"],
         mono: ["var(--font-jetbrains-mono)", "JetBrains Mono", "monospace"],
       },
       boxShadow: {
