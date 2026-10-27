@@ -397,3 +397,10 @@ SecondLife AI explores how intelligent recommendations and responsible destinati
 **Building a more circular future, one device at a time.**
 
 </div>
+
+
+## Feedback
+
+Found a bug or have an idea to improve SecondLife AI? Open an issue in this repository and describe what you ran into.
+
+
