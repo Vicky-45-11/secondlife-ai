@@ -240,6 +240,51 @@ Verify that these scripts are available in `package.json` before running them. T
 | `/process` | Six-stage next-life workflow |
 | `/impact` | Synthetic impact metrics and locally stored analysis history |
 | `/destinations` | Searchable and filterable illustrative destination directory |
+
+
+## ✨ Features
+
+- **Device analysis:** upload a photo, pick the device category and condition, and add notes.
+- **Ranked next-life recommendations:** repair, reuse, refurbish, donate, or recycle responsibly.
+- **Destination directory:** find places where a device can go next.
+- **Impact dashboard:** see the environmental value of keeping electronics in use.
+- **Story-driven landing page:** a modern, sustainability-focused interface.
+
+## 🚀 Getting Started
+
+Requirements: Node.js 18 or newer and npm.
+
+git clone https://github.com/Vicky-45-11/secondlife-ai.git
+cd secondlife-ai
+npm install
+npm run dev
+
+Then open http://localhost:3000 in your browser.
+
+## 🔍 How It Works
+
+1. **Describe the device.** Add a photo, choose its category and condition, and include any notes.
+2. **Analyze.** The platform weighs the details and ranks the possible next steps.
+3. **Choose a path.** Review the recommendations for repair, reuse, refurbishment, donation, or recycling.
+4. **Find a destination.** Use the directory to see where to take the device.
+5. **Track impact.** The dashboard shows the value of giving devices a second life.
+
+## 🏗️ Architecture
+
+- **Framework:** Next.js 15
+- **Language:** TypeScript
+- **Interface:** landing page, analysis workflow, destination directory, and impact dashboard
+
+## 🗺️ Roadmap
+
+- Connect to a real image-recognition model for device analysis
+- Expand the destination directory with verified repair, donation, and recycling partners
+- Add user accounts to save past analyses
+- Improve impact estimates with real recycling and carbon data
+
+## 📄 License
+
+Add a license here.
 | `/privacy` | Privacy and data-handling information |
 
 ## 🏗️ Architecture
